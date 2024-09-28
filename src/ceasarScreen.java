@@ -1,4 +1,4 @@
-package GiaoDien;
+
 
 import java.awt.Component;
 
@@ -10,15 +10,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class bangChuDonScreen extends subScreen {
+public class ceasarScreen extends subScreen {
+	
 	private  JFrame frame;
-	private doanlaptrinhmahoa mainClass;
 
-    public bangChuDonScreen(doanlaptrinhmahoa mainClass) {
-        this.mainClass = mainClass;
+	public ceasarScreen(doanlaptrinhmahoa mainClass) {
+        super(mainClass); // Truyền lớp chính vào lớp cha
     }
 	
 	
@@ -64,15 +65,15 @@ public class bangChuDonScreen extends subScreen {
 	    }
 
 	    // Ghi đè tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
-	      plaintext.setBounds(10, 11, 500, 100);
-	      cipherText.setBounds(10, 200, 500, 100);
-	      encrytionbutton.setBounds(550,81,90,30);
-	      decrytionbutton.setBounds(550,268,90,30);
-	      keyText1.setBounds(550,11,30,30);
-	      keyText2.setBounds(550,200,30, 30);
-	      keyE.setBounds(590,11,180,30);
-	      keyD.setBounds(590,200,180,30);
-	      exitButton.setBounds(700,140,60,30);
+	    plaintext.setBounds(10, 11, 500, 100);
+	    cipherText.setBounds(10, 200, 500, 100);
+	    encrytionbutton.setBounds(550, 81, 90, 30);
+	    decrytionbutton.setBounds(550, 268, 90, 30);
+	    exitButton.setBounds(700, 140, 60, 30);
+	    keyText1.setBounds(550, 11, 30, 30);
+	    keyText2.setBounds(550, 200, 30, 30);
+	    keyE.setBounds(590, 11, 180, 30);
+	    keyD.setBounds(590, 200, 180, 30);
 	    
 	    
 	    
@@ -117,17 +118,6 @@ public class bangChuDonScreen extends subScreen {
         	JOptionPane.showMessageDialog(frame, "Bạn nhấn nút Decrypt");
         }
     });
-	    
-	    
-	    
-	 // Thêm sự kiện cho nút Exit
-	    exitButton.addActionListener(new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	        	
-	        	mainClass.settingMainScreen(); // Quay về màn hình chính
-	        }
-	    });
 	    
 	    
 	    return Panel;

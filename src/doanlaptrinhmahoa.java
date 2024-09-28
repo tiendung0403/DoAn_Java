@@ -1,9 +1,4 @@
-package GiaoDien;
-
-import GiaoDien.*;
-
 import javax.swing.*;
-import javax.swing.text.PlainDocument;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -136,9 +131,5 @@ public class doanlaptrinhmahoa {
     
         frame.add(panelContainer);
         frame.setVisible(true);
-        
-        
     }
-    
-
 }

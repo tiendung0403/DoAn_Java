@@ -1,5 +1,8 @@
-package GiaoDien;
 
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,19 +14,27 @@ import javax.swing.text.PlainDocument;
 
 public class subScreen {
 	
+	private doanlaptrinhmahoa mainClass;
+
+    // Constructor nhận tham chiếu của lớp chính
+    public subScreen(doanlaptrinhmahoa mainClass) {
+        this.mainClass = mainClass;
+    }
+	
+	
 	protected JPanel Screen() {
 		JPanel newPanel = new JPanel(null);
 		
 		//khởi tạo các thành phần
-      JTextArea plaintext = new JTextArea();
-      JTextArea cipherText = new JTextArea();
-      JButton encrytionbutton = new JButton("Encrytion");
-      JButton decrytionbutton = new JButton("Decrytion");
-      JButton exitButton = new JButton("Exit");
-      JLabel keyText1 = new JLabel("Key");
-      JLabel keyText2 = new JLabel("Key"); 
-      JTextField keyE = new JTextField();
-      JTextField keyD = new JTextField();
+        JTextArea plaintext = new JTextArea();
+        JTextArea cipherText = new JTextArea();
+        JButton encrytionbutton = new JButton("Encrytion");
+        JButton decrytionbutton = new JButton("Decrytion");
+        JButton exitButton = new JButton("Exit");
+        JLabel keyText1 = new JLabel("Key");
+        JLabel keyText2 = new JLabel("Key"); 
+        JTextField keyE = new JTextField();
+        JTextField keyD = new JTextField();
 		
          //sét tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
         plaintext.setBounds(10, 11, 500, 100);
@@ -63,6 +74,16 @@ public class subScreen {
         newPanel.add(keyE);
         newPanel.add(keyD);
         newPanel.add(exitButton);
+
+        
+        // Nút exit trở màn hình chính cho tất cả các class kế thừa
+	    exitButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	
+	        	mainClass.settingMainScreen(); // Quay về màn hình chính
+	        }
+	    });
         
         
         return newPanel;
