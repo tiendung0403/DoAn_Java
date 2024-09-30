@@ -1,22 +1,24 @@
 package Script;
 
-public class Ceasar {
+public class Caesar {
     private int key;
     private String plaintext;
     private String ciphertext;
 
-    public Ceasar (){
+    public Caesar (){
         this.key = 0;
         this.plaintext = "";
         this.ciphertext = "";
     }
+
     public void setKey(int k){
         if (k>=0 && k<=25) {
             this.key = k;
         }
         else {
-            System.err.println("key khong dung");
-        }
+            //hiển thị lỗi, ném ngoaij lệ
+            throw new IllegalArgumentException("Khóa không hợp lệ");       
+         }
     }
     public int getKey(){
         return key;
@@ -36,9 +38,8 @@ public class Ceasar {
         return ciphertext;
     }
     //
-    public String enCrytion(String plaintext,int key) {
-        String ciphertext = "";
-        
+    public String encrypt (String plaintext,int key) {
+                
         for (char c: plaintext.toCharArray()) {
             if (Character.isLetter(c)) {             
                 char n = (c >= 'A' && c <= 'Z') ? 'A' : 'a';
@@ -50,9 +51,9 @@ public class Ceasar {
         return ciphertext;
     }
     //giải mã 
-    public String deCrytion(String ciphertext,int key){
+    public String decrypt (String ciphertext,int key){
         
-        return enCrytion(ciphertext, 26 - key);
+        return encrypt (ciphertext, 26 - key);
     }
 }
 

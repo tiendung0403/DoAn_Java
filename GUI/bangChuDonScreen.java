@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Script.Bangchudon;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -80,20 +82,18 @@ public class bangChuDonScreen extends subScreen {
       encrytionbutton.addActionListener(new ActionListener() {
           @Override
           public void actionPerformed(ActionEvent e) {
-//              Ceasar a = new Ceasar();
-//              try {/* 
-//                  //thực hiện ép kiểu từ chuỗi string của Key sang kiểu int
-//                  để kiểm tra xem Key có phải là number không 
-//                  nếu thành công thì tiến hành gán kết quả mã hóa vào biến C 
-//                  và hiển thị vào Ô cipertext*/
-//                  Integer.parseInt(keyE.getText());                
-//                  String C = a.enCrytion(plaintext.getText(),Integer.parseInt(keyE.getText()));
-//                  cipherText.setText(C);
-//              } catch (NumberFormatException ex ) {
-//                  // hiển thị thông báo khi lỗi khi không ép kiểu thanhf công "key không phải dạnh number" 
-//                  JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng number");
-//              }
-        	  JOptionPane.showMessageDialog(frame, "Bạn nhấn nút Encrypt");
+			// Bangchudon a = new Bangchudon();
+			// try {/*thực hiện ép kiểu sstring sang int nếu thành công
+			// 	tứ key không phải dạng chuỗi, thực hiện hiển thị thông báo loi*/
+			// 	Integer.parseInt(keyE.getText());                    
+			// 	JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng String vd: \"nhaplaidi\"");
+			
+			// } catch (NumberFormatException ex ) {
+			// //nếu key dạng chuỗi thì thực hiện câu lệnh
+			// 	String C = a.encrypt(plaintext.getText(),keyE.getText());
+			// 	cipherText.setText(C);
+			// }
+		  JOptionPane.showMessageDialog(frame, "Bạn nhấn nút Encrypt");
           }
       });
 	    
@@ -102,19 +102,18 @@ public class bangChuDonScreen extends subScreen {
     decrytionbutton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-//            Ceasar a = new Ceasar();
-//            try {/*thực hiện ép kiểu từ chuỗi string của Key sang kiểu int
-//                để kiểm tra xem Key có phải là number không 
-//                nếu thành công thì tiến hành gán kết quả mã hóa vào biến C 
-//                và hiển thị vào Ô cipertext*/
-//                Integer.parseInt(keyD.getText());                
-//                String p = a.deCrytion(cipherText.getText(),Integer.parseInt(keyD.getText()));
-//                plaintext.setText(p);
-//            } catch (NumberFormatException ex ) {
-//                // hiển thị thông báo khi lỗi khi không ép kiểu thanh công "key không phải dạnh number" 
-//                JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng number");
-//            }
-        	JOptionPane.showMessageDialog(frame, "Bạn nhấn nút Decrypt");
+			// Bangchudon a = new Bangchudon();
+			// try {
+			// //Kiểm tra nếu key được nhập là một số nguyên
+			// 	Integer.parseInt(keyD.getText());
+			// //hiển thị thông báo Key không đúng
+			// 	JOptionPane.showMessageDialog(frame, "Nhập sai Key! Vui lòng nhập key dạng chuỗi.");
+			// } catch (NumberFormatException ex) {
+			// //Khi key không phải là số thực hiện giải mã
+			// 	String p = a.decrypt(cipherText.getText(), keyD.getText());
+			// 	plaintext.setText(p); // Đưa kết quả giải mã vào ô plaintext
+			// }
+		JOptionPane.showMessageDialog(frame, "Bạn nhấn nút Decrypt");
         }
     });
     
