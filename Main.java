@@ -1,4 +1,4 @@
-import GUI.doanlaptrinhmahoa;
+//import GUI.doanlaptrinhmahoa;
 import Script.PlayFair;
 
 public class Main {
@@ -10,7 +10,7 @@ public class Main {
         
 		PlayFair a = new PlayFair();
 		
-		String pT = "Attack at dawn";
+		String pT = "i i i i ij j jj";
 		String k = "Gravity Falls";
 		
 		a.setPlainText(pT);

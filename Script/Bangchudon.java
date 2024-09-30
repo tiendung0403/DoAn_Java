@@ -1,3 +1,4 @@
+package Script;
 
 public class Bangchudon {
 
