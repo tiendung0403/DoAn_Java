@@ -1,5 +1,7 @@
 package Script;
 
+import java.util.Random;
+
 public class Bangchudon {
 
     private String plaintext, ciphertext,key;
@@ -11,75 +13,81 @@ public class Bangchudon {
     }
 
     public void setPlaintext(String p){
-        // this.plaintext = "";
-        // for(char c : p.toCharArray()){
-        //     if(c>='a'&& c<='z' || c>='A' && c<='Z'){
-        //         this.plaintext +=c;
-        //     }
-        // }
+        this.plaintext = p.toUpperCase();
     }
     public String getPlaintext(){
         return this.plaintext;
     }
     public void setCiphertext(String c){
-        // this.ciphertext ="";
-        // for(char i: c.toCharArray()){
-        //     if(i>='a'&& i<='z' || i>='A' && i<='Z'){
-        //         this.ciphertext += i;
-        //     }
-        // }
+        this.ciphertext = c.toUpperCase();
     }
     public String getCiphertext(){
         return this.ciphertext;
     }
     public void setKey(String k){
-        // this.key = "";
-        // for(char c: k.toCharArray()){
-        //     if(c>='a'&& c<='z' || c>='A' && c<='Z'){
-        //         this.key += c;
-        //     }
-        // }
+        this.key = standardizingKey(k.toCharArray());
+        
+    }
+    public String standardizingKey(char[] k){
+        String temp = new String();
+        for(char c : k){
+            if((c>='a'&& c<='z') || (c>='A' && c<='Z')){
+                temp += c;
+            }
+        }
+        return temp.toUpperCase();
     }
     public String getKey(){
         return this.key;
     }
-    public String encrypt (String plaintext,String key){
-        // ciphertext = "";
-        // int keyLen = key.length();
-        // int keyIndex = 0;
+    public String encrypt (String plt,String k){
+        ciphertext = "";
+        setPlaintext(plt);
+        plt = getPlaintext();
 
-        // for (char c: plaintext.toCharArray()) {
-        //     if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
-        //         char n = (c >= 'A' && c <= 'Z') ? 'A' : 'a';
-        //         char keynew = Character.toUpperCase(key.charAt(keyIndex % keyLen));
-        //         keynew -= 'A';
-        //         ciphertext += (char) ((c - n + keynew) % 26 + n);
-        //         keyIndex++;
-        //     }
-        //     else ciphertext += c;
-        // }
-        return ciphertext;
+
+        for (char c: plt.toCharArray()) {
+            if ( c >= 'A' && c <= 'Z') {
+                int i = (int)( c - 'A');
+                ciphertext += k.charAt(i);
+            }
+            else ciphertext += c;
+        }
+        return ciphertext.toUpperCase();
     }
 
 
-    public String decrypt (String ciphertext, String key){
-        // plaintext = "";
-        // int keyLen = key.length();
-        // int keyIndex = 0;
-
-        // for (char c: ciphertext.toCharArray()) {
-        //     if ( (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
-        //         char n = (c >= 'A' && c <= 'Z') ? 'A' : 'a';
-        //         char keynew = Character.toUpperCase(key.charAt(keyIndex % keyLen));
-        //         keynew -= 'A';
-
-        //         plaintext += (char)((c - n - keynew + 26) % 26 + n);
-        //         keyIndex++;
-                
-        //     }
-        //     else plaintext += c;
-        // }
+    public String decrypt (String cpt, String k){
+        plaintext = "";
+        for(char c : cpt.toCharArray()){
+            if(c >= 'A' && c <= 'Z'){
+                for ( int i = 0; i < 26 ; i++ ){
+                    if(c == k.charAt(i)){
+                        plaintext +=(char) (i +'A');
+                    }
+                }
+            }
+            else plaintext += c;
+        }
         return plaintext;
-
+       
+    } 
+    public void swap(char[] c,int a,int b){
+        char temp = c[a];
+        c[a] = c[b];
+        c[b] = temp;
     }
+    public String randomKey(){
+            Random rdk = new Random();
+            char[] c = new char[26];
+
+            for(int i = 0 ; i <26 ; i++){
+                c[i] = (char) (i + 'A');
+            }
+            for(int i = 0 ; i <26 ; i++){
+                swap(c, i, rdk.nextInt(26));
+            }
+            return new String(c);
+    }
+    
 }

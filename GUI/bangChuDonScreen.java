@@ -1,11 +1,5 @@
-
-
-import java.awt.Component;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -17,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class bangChuDonScreen extends subScreen {
-	private  JFrame frame;
+	private  JPanel Panel;
 	
 	public bangChuDonScreen(doanlaptrinhmahoa mainClass) {
         super(mainClass); // Truyền lớp chính vào lớp cha
@@ -26,54 +20,62 @@ public class bangChuDonScreen extends subScreen {
 	
 	@Override
 	protected JPanel Screen() {
-	    JPanel Panel = super.Screen();
+	    this.Panel = super.Screen();
 	    
 	    // Lấy các thành phần trong Panel
 	    JTextArea plaintext = (JTextArea) ((JScrollPane) Panel.getComponent(0)).getViewport().getView();
 	    JTextArea cipherText = (JTextArea) ((JScrollPane) Panel.getComponent(1)).getViewport().getView();
 	    
-		JButton encrytionbutton = (JButton) Panel.getComponent(2);
-		JButton decrytionbutton = (JButton) Panel.getComponent(3);
+		JButton encrybutton = (JButton) Panel.getComponent(2);
+		JButton decrybutton = (JButton) Panel.getComponent(3);
 		JTextField keyE = (JTextField) Panel.getComponent(7);
 		JTextField keyD = (JTextField) Panel.getComponent(8);
+		JLabel keyText1 = (JLabel) Panel.getComponent(5);
+        JLabel keyText2 = (JLabel) Panel.getComponent(6); 
+
+		JButton randomkeybt = new JButton("Random Key");
+		JTextField text = new JTextField("ABCDEFGHIJKLNMOPQRSTUVWXYZ");
+        
+		keyText1.setBounds(520,11,30,30);
+        keyText2.setBounds(520,200,30, 30);
+		encrybutton.setBounds(450, 81, 90, 30);
+		randomkeybt.setBounds(550, 81, 120, 30);
+		keyE.setBounds(560,11,220,30);
+		keyD.setBounds(560,200,220,30);
+		text.setBounds(560,45,220,30);
+		Panel.add(text);
+		Panel.add(randomkeybt);
 
 	    //tạo sự kiện sau khi click vào nút Encrytion
 		
-        encrytionbutton.addActionListener(new ActionListener() {
+        encrybutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 			    Bangchudon a = new Bangchudon();
-			    try {/*thực hiện ép kiểu sstring sang int nếu thành công
-				tứ key không phải dạng chuỗi, thực hiện hiển thị thông báo loi*/
-				    Integer.parseInt(keyE.getText());                    
-				    JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng String vd: \"nhaplaidi\"");
-			
-			    } catch (NumberFormatException ex ) {
-			//nếu key dạng chuỗi thì thực hiện câu lệnh
-				    String C = a.encrypt(plaintext.getText(),keyE.getText());
-				    cipherText.setText(C);
-			    }
-            }
+				cipherText.setText(a.encrypt(plaintext.getText(),keyE.getText()));
+			}
         });
 	    
 	    
     //tạo sự kiện sau khi click vào nút Encrytion
-        decrytionbutton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-			Bangchudon a = new Bangchudon();
-			try {
-			//Kiểm tra nếu key được nhập là một số nguyên
-				Integer.parseInt(keyD.getText());
-			//hiển thị thông báo Key không đúng
-				JOptionPane.showMessageDialog(frame, "Nhập sai Key! Vui lòng nhập key dạng chuỗi.");
-			} catch (NumberFormatException ex) {
-			//Khi key không phải là số thực hiện giải mã
-				String p = a.decrypt(cipherText.getText(), keyD.getText());
-				plaintext.setText(p); // xóa kết quả cũ và Đưa kết quả mới giải mã vào ô plaintext
+        decrybutton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+			    Bangchudon a = new Bangchudon();
+
+				plaintext.setText(a.decrypt(cipherText.getText(), keyD.getText())); // xóa kết quả cũ và Đưa kết quả mới giải mã vào ô plaintext
+            }
+        });
+
+		randomkeybt.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e){
+				Bangchudon a = new Bangchudon();
+				String s = a.randomKey();
+				keyE.setText(s);
+				keyD.setText(s);
 			}
-        }
-    });
+		});
     
 	    return Panel;
 	}
