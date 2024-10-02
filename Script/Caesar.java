@@ -21,21 +21,21 @@ public class Caesar {
          }
     }
     public int getKey(){
-        return key;
+        return this.key;
     }
 //
     public void setPlaintext(String p){
         this.plaintext = p;
     }
     public String getPlaintext(){
-        return plaintext;
+        return this.plaintext;
     }
     //
     public void setCiphertext(String c){
         this.ciphertext = c ;
     }
     public String getCiphertext(){
-        return ciphertext;
+        return this.ciphertext;
     }
     //
     public String encrypt (String plaintext,int key) {
