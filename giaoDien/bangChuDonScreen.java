@@ -1,3 +1,8 @@
+
+package giaoDien;
+
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,33 +27,32 @@ public class bangChuDonScreen extends subScreen {
 	protected JPanel Screen() {
 	    this.Panel = super.Screen();
 	    
-	    // Lấy các thành phần trong Panel
-	    JTextArea plaintext = (JTextArea) ((JScrollPane) Panel.getComponent(0)).getViewport().getView();
-	    JTextArea cipherText = (JTextArea) ((JScrollPane) Panel.getComponent(1)).getViewport().getView();
-	    
-		JButton encrybutton = (JButton) Panel.getComponent(2);
-		JButton decrybutton = (JButton) Panel.getComponent(3);
-		JTextField keyE = (JTextField) Panel.getComponent(7);
-		JTextField keyD = (JTextField) Panel.getComponent(8);
-		JLabel keyText1 = (JLabel) Panel.getComponent(5);
-        JLabel keyText2 = (JLabel) Panel.getComponent(6); 
+
 
 		JButton randomkeybt = new JButton("Random Key");
 		JTextField text = new JTextField("ABCDEFGHIJKLNMOPQRSTUVWXYZ");
-        
+
+        plaintext.setBounds(10, 11, 400, 100);
+        cipherText.setBounds(10, 200, 400, 100);
 		keyText1.setBounds(520,11,30,30);
         keyText2.setBounds(520,200,30, 30);
-		encrybutton.setBounds(450, 81, 90, 30);
-		randomkeybt.setBounds(550, 81, 120, 30);
+		encrytionbutton.setBounds(450, 81, 90, 30);
+		decrytionbutton.setBounds(550,268,90,30);
 		keyE.setBounds(560,11,220,30);
 		keyD.setBounds(560,200,220,30);
+
+		randomkeybt.setBounds(550, 81, 120, 30);
 		text.setBounds(560,45,220,30);
 		Panel.add(text);
 		Panel.add(randomkeybt);
+	  //set tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
+        exitButton.setBounds(700,140,60,30);
 
+        
+        
 	    //tạo sự kiện sau khi click vào nút Encrytion
 		
-        encrybutton.addActionListener(new ActionListener() {
+        encrytionbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 			    Bangchudon a = new Bangchudon();
@@ -58,7 +62,7 @@ public class bangChuDonScreen extends subScreen {
 	    
 	    
     //tạo sự kiện sau khi click vào nút Encrytion
-        decrybutton.addActionListener(new ActionListener() {
+        decrytionbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 			    Bangchudon a = new Bangchudon();

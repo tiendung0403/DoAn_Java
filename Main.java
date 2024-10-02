@@ -1,6 +1,5 @@
-//import GUI.doanlaptrinhmahoa;
-//import Script.Bangchudon;
-//import Script.PlayFair;
+import giaoDien.*;
+import Script.PlayFair;
 
 public class Main {
 	public static void main(String[] args) {

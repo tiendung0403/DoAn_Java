@@ -1,3 +1,4 @@
+package giaoDien;
 
 
 
@@ -14,6 +15,18 @@ import javax.swing.text.PlainDocument;
 
 public class subScreen {
 	
+	protected JTextArea plaintext;
+    protected JTextArea cipherText;
+    protected JButton encrytionbutton;
+    protected JButton decrytionbutton;
+    protected JButton exitButton;
+    protected JLabel keyText1;
+    protected JLabel keyText2;
+    protected JTextField keyE;
+    protected JTextField keyD;
+	
+	
+	
 	private doanlaptrinhmahoa mainClass;
 
     // Constructor nhận tham chiếu của lớp chính
@@ -26,26 +39,17 @@ public class subScreen {
 		JPanel newPanel = new JPanel(null);
 		
 		//khởi tạo các thành phần
-        JTextArea plaintext = new JTextArea();
-        JTextArea cipherText = new JTextArea();
-        JButton encrytionbutton = new JButton("Encrytion");
-        JButton decrytionbutton = new JButton("Decrytion");
-        JButton exitButton = new JButton("Exit");
-        JLabel keyText1 = new JLabel("Key");
-        JLabel keyText2 = new JLabel("Key"); 
-        JTextField keyE = new JTextField();
-        JTextField keyD = new JTextField();
+        plaintext = new JTextArea();
+        cipherText = new JTextArea();
+        encrytionbutton = new JButton("Encrytion");
+        decrytionbutton = new JButton("Decrytion");
+        exitButton = new JButton("Exit");
+        keyText1 = new JLabel("Key");
+        keyText2 = new JLabel("Key"); 
+        keyE = new JTextField();
+        keyD = new JTextField();
 		
-         //sét tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
-        plaintext.setBounds(10, 11, 400, 100);
-        cipherText.setBounds(10, 200, 400, 100);
-        encrytionbutton.setBounds(550,81,90,30);
-        decrytionbutton.setBounds(550,268,90,30);
-        exitButton.setBounds(700,140,60,30);
-        keyText1.setBounds(550,11,30,30);
-        keyText2.setBounds(550,200,30, 30);
-        keyE.setBounds(590,11,180,30);
-        keyD.setBounds(590,200,180,30);
+        
         
         
       //Không giới hạn số lượng kí tự khi nhập vào textArea
