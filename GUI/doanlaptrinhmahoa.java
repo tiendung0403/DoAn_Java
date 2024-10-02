@@ -69,6 +69,12 @@ public class doanlaptrinhmahoa {
 
     //tạo nút mới tên bảng chữ đơn
         JButton vegenereButton = new JButton("Vegenere");
+        vegenereButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                changeScreen("VegenereScreen", "Vegenere", true, "Nhập Key không có khoảng trắng và chữ số");
+            }
+        });
 
     //tạo nút mới tên bảng chữ đơn
         JButton chuyendichdongButton = new JButton("Chuyển dịch dòng");
@@ -111,7 +117,10 @@ public class doanlaptrinhmahoa {
     	return bCDC;
     }
         
-    
+    public JPanel vegenereScr(){
+        JPanel vgn = new vegenereScreen(this).Screen();
+        return vgn;
+    }
     
     public void start() {
     	cardLayout = new CardLayout();
@@ -121,11 +130,13 @@ public class doanlaptrinhmahoa {
         JPanel mainScreen = mainScreen();
         JPanel caesarScreen = caesar();
         JPanel bangChuDonScreen = bangChuDonScr();
+        JPanel vegenereScreen = vegenereScr();
     
         // Thêm các màn hình vào CardLayout
         panelContainer.add(mainScreen, "MainScreen");
         panelContainer.add(caesarScreen, "CaesarScreen");
         panelContainer.add(bangChuDonScreen,"BangchudonScreen");
+        panelContainer.add(vegenereScreen,"VegenereScreen");
     
         // Thiết lập màn hình chính hiển thị đầu tiên
         cardLayout.show(panelContainer, "MainScreen");
