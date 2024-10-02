@@ -1,4 +1,4 @@
-//import GUI.doanlaptrinhmahoa;
+import giaoDien.*;
 import Script.PlayFair;
 
 public class Main {

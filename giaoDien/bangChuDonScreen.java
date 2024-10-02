@@ -1,4 +1,4 @@
-
+package giaoDien;
 
 import java.awt.Component;
 
@@ -28,15 +28,19 @@ public class bangChuDonScreen extends subScreen {
 	protected JPanel Screen() {
 	    JPanel Panel = super.Screen();
 	    
-	    // Lấy các thành phần trong Panel
-	    JTextArea plaintext = (JTextArea) ((JScrollPane) Panel.getComponent(0)).getViewport().getView();
-	    JTextArea cipherText = (JTextArea) ((JScrollPane) Panel.getComponent(1)).getViewport().getView();
-	    
-		JButton encrytionbutton = (JButton) Panel.getComponent(2);
-		JButton decrytionbutton = (JButton) Panel.getComponent(3);
-		JTextField keyE = (JTextField) Panel.getComponent(7);
-		JTextField keyD = (JTextField) Panel.getComponent(8);
+	  //set tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
+        plaintext.setBounds(10, 11, 400, 100);
+        cipherText.setBounds(10, 200, 400, 100);
+        encrytionbutton.setBounds(550,81,90,30);
+        decrytionbutton.setBounds(550,268,90,30);
+        exitButton.setBounds(700,140,60,30);
+        keyText1.setBounds(550,11,30,30);
+        keyText2.setBounds(550,200,30, 30);
+        keyE.setBounds(590,11,180,30);
+        keyD.setBounds(590,200,180,30);
 
+        
+        
 	    //tạo sự kiện sau khi click vào nút Encrytion
 		
         encrytionbutton.addActionListener(new ActionListener() {

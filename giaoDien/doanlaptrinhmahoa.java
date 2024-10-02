@@ -1,5 +1,5 @@
+package giaoDien;
 import javax.swing.*;
-
 
 import java.awt.*;
 import java.awt.event.*;
@@ -27,7 +27,7 @@ public class doanlaptrinhmahoa {
         frame.setSize(800,600);
     }
     
-    //												Đặt tựa đề	  Có note không ?   Note (nếu có)
+    //										 Đặt tựa đề	   Có note không ?   Note (nếu có)
     private void changeScreen(String screen, String title, Boolean haveNote, String note) {
     	// Chuyển sang màn hình Caesar
         cardLayout.show(panelContainer, screen);
@@ -79,6 +79,8 @@ public class doanlaptrinhmahoa {
     //tạo nút mới tên bảng chữ đơn
         JButton chuyendichdongButton = new JButton("Chuyển dịch dòng");
 
+        
+        
     //tạo nút mới tên bảng chữ đơn
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ActionListener() {//Tạo sự kiện sau khi click nút Exit
