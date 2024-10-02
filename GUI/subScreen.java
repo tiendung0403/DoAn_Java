@@ -37,8 +37,8 @@ public class subScreen {
         JTextField keyD = new JTextField();
 		
          //sét tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
-        plaintext.setBounds(10, 11, 500, 100);
-        cipherText.setBounds(10, 200, 500, 100);
+        plaintext.setBounds(10, 11, 400, 100);
+        cipherText.setBounds(10, 200, 400, 100);
         encrytionbutton.setBounds(550,81,90,30);
         decrytionbutton.setBounds(550,268,90,30);
         exitButton.setBounds(700,140,60,30);
@@ -58,23 +58,22 @@ public class subScreen {
         plaintext.setWrapStyleWord(true); // Tự động xuống từ hoàn chỉnh, không cắt từ
         
         JScrollPane plainScrollPane = new JScrollPane(plaintext);// Tạo thanh cuộn cho plaintext
-        plainScrollPane.setBounds(10, 11, 500, 100);
+        plainScrollPane.setBounds(10, 11, 400, 100);
         JScrollPane cipherScrollPane = new JScrollPane(cipherText);// Tạo thanh cuộn cho cipherText
-        cipherScrollPane.setBounds(10, 200, 500, 100);
+        cipherScrollPane.setBounds(10, 200, 400, 100);
         
         
         
         // thêm các thành phần vào panel
         newPanel.add(plainScrollPane);
         newPanel.add(cipherScrollPane);
-        newPanel.add(keyText1);
-        newPanel.add(keyText2);
         newPanel.add(encrytionbutton);
         newPanel.add(decrytionbutton);
+        newPanel.add(exitButton);
+        newPanel.add(keyText1);
+        newPanel.add(keyText2);
         newPanel.add(keyE);
         newPanel.add(keyD);
-        newPanel.add(exitButton);
-
         
         // Nút exit trở màn hình chính cho tất cả các class kế thừa
 	    exitButton.addActionListener(new ActionListener() {
