@@ -15,6 +15,8 @@ import javax.swing.text.PlainDocument;
 
 public class subScreen {
 	
+	protected JLabel plaintextJLabel;
+    protected JLabel ciphertextJLabel;
 	protected JTextArea plaintext;
     protected JTextArea cipherText;
     protected JButton encrytionbutton;
@@ -24,7 +26,7 @@ public class subScreen {
     protected JLabel keyText2;
     protected JTextField keyE;
     protected JTextField keyD;
-	
+    
 	
 	
 	private doanlaptrinhmahoa mainClass;
@@ -39,6 +41,8 @@ public class subScreen {
 		JPanel newPanel = new JPanel(null);
 		
 		//khởi tạo các thành phần
+		plaintextJLabel = new JLabel("Plaintext");
+        ciphertextJLabel = new JLabel("Ciphertext");
         plaintext = new JTextArea();
         cipherText = new JTextArea();
         encrytionbutton = new JButton("Encrytion");
@@ -48,7 +52,6 @@ public class subScreen {
         keyText2 = new JLabel("Key"); 
         keyE = new JTextField();
         keyD = new JTextField();
-		
         
         
         
@@ -62,11 +65,17 @@ public class subScreen {
         plaintext.setWrapStyleWord(true); // Tự động xuống từ hoàn chỉnh, không cắt từ
         
         JScrollPane plainScrollPane = new JScrollPane(plaintext);// Tạo thanh cuộn cho plaintext
-        plainScrollPane.setBounds(10, 11, 400, 100);
         JScrollPane cipherScrollPane = new JScrollPane(cipherText);// Tạo thanh cuộn cho cipherText
-        cipherScrollPane.setBounds(10, 200, 400, 100);
         
         
+        
+     // set tọa độ plaintext và ciphertext
+        plaintextJLabel.setBounds(10, 22, 100, 20);
+	    ciphertextJLabel.setBounds(10, 182, 100, 20);
+	    plainScrollPane.setBounds(10, 40, 400, 100);
+	    cipherScrollPane.setBounds(10, 200, 400, 100);
+	    
+	    
         
         // thêm các thành phần vào panel
         newPanel.add(plainScrollPane);
@@ -78,11 +87,17 @@ public class subScreen {
         newPanel.add(keyText2);
         newPanel.add(keyE);
         newPanel.add(keyD);
+        newPanel.add(plaintextJLabel);
+        newPanel.add(ciphertextJLabel);
         
         // Nút exit trở màn hình chính cho tất cả các class kế thừa
 	    exitButton.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
+	        	plaintext.setText(null);
+	        	cipherText.setText(null);
+	        	keyE.setText(null);
+	        	keyD.setText(null);
 	        	
 	        	mainClass.settingMainScreen(); // Quay về màn hình chính
 	        }

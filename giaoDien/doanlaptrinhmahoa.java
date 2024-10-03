@@ -24,7 +24,9 @@ public class doanlaptrinhmahoa {
     protected void settingMainScreen(){
         cardLayout.show(panelContainer, "MainScreen");
         frame.setTitle("Đồ án Lập trình Mã hóa cổ điển");
+        frame.setResizable(false);
         frame.setSize(800,600);
+        
     }
     
     //										 Đặt tựa đề	   Có note không ?   Note (nếu có)
@@ -34,6 +36,7 @@ public class doanlaptrinhmahoa {
     //set Title với tên Caesar Cipher
         frame.setTitle(title);
         frame.setSize(800,400);
+        frame.setResizable(false);
         
         if (haveNote == true) {
         	JOptionPane.showMessageDialog(frame, note);
@@ -66,6 +69,16 @@ public class doanlaptrinhmahoa {
 
     //tạo nút mới tên bảng chữ đơn
         JButton playFairButton = new JButton("PlayFair");
+        playFairButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeScreen("PlayfairScreen", "Playfair", true, "Không nhập số và kí tự đặc biệt");
+				
+			}
+		});
+        
+        
 
     //tạo nút mới tên bảng chữ đơn
         JButton vegenereButton = new JButton("Vegenere");
@@ -118,11 +131,20 @@ public class doanlaptrinhmahoa {
     	JPanel bCDC = new bangChuDonScreen(this).Screen();
     	return bCDC;
     }
-        
+       
+ // màn hình và chức năng của Bảng vegenere
     public JPanel vegenereScr(){
         JPanel vgn = new vegenereScreen(this).Screen();
         return vgn;
     }
+    
+    
+    // màn hình và chức năng của Bảng playfair
+    public JPanel playfairScr(){
+        JPanel pf = new playfairScreen(this).Screen();
+        return pf;
+    }
+    
     
     public void start() {
     	cardLayout = new CardLayout();
@@ -133,13 +155,15 @@ public class doanlaptrinhmahoa {
         JPanel caesarScreen = caesar();
         JPanel bangChuDonScreen = bangChuDonScr();
         JPanel vegenereScreen = vegenereScr();
+        JPanel playfairScreen = playfairScr();
     
         // Thêm các màn hình vào CardLayout
         panelContainer.add(mainScreen, "MainScreen");
         panelContainer.add(caesarScreen, "CaesarScreen");
         panelContainer.add(bangChuDonScreen,"BangchudonScreen");
         panelContainer.add(vegenereScreen,"VegenereScreen");
-    
+        panelContainer.add(playfairScreen,"PlayfairScreen");
+        
         // Thiết lập màn hình chính hiển thị đầu tiên
         cardLayout.show(panelContainer, "MainScreen");
     

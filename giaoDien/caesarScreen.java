@@ -30,8 +30,7 @@ public class caesarScreen extends subScreen {
 	    JPanel Panel = super.Screen();
 
 	    //set tọa độ hiển thị (x,y,chiều rộng,chiều cao) cho các thành phần 
-        plaintext.setBounds(10, 11, 400, 100);
-        cipherText.setBounds(10, 200, 400, 100);
+
         encrytionbutton.setBounds(550,81,90,30);
         decrytionbutton.setBounds(550,268,90,30);
         exitButton.setBounds(700,140,60,30);

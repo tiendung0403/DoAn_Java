@@ -32,8 +32,6 @@ public class bangChuDonScreen extends subScreen {
 		JButton randomkeybt = new JButton("Random Key");
 		JTextField text = new JTextField("ABCDEFGHIJKLNMOPQRSTUVWXYZ");
 
-        plaintext.setBounds(10, 11, 400, 100);
-        cipherText.setBounds(10, 200, 400, 100);
 		keyText1.setBounds(520,11,30,30);
         keyText2.setBounds(520,200,30, 30);
 		encrytionbutton.setBounds(450, 81, 90, 30);

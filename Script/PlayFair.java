@@ -1,5 +1,6 @@
 package Script;
 
+import java.util.Arrays;
 
 public class PlayFair {
 	private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -10,6 +11,7 @@ public class PlayFair {
 	private String key = "";
 	private String plainText = "";
 	
+	private char kiTuThayThe = 'X';
 	
 	
 	public PlayFair() {
@@ -17,24 +19,18 @@ public class PlayFair {
 	}
 	
 	public PlayFair(String key, String plainText) {
-		// Cả key và plainText đều không có kí tự đặc biệt và số
-		if (!checkString(key) && !checkString(plainText)) {
-			add_Alphabet_into_Arr();
-			chuanHoaPlainText();
-			this.key = key.toUpperCase();
-			this.plainText = plainText.toUpperCase();
-		}
-		else {
-			
-			// Bắt người dùng nhập lại, xử lí ở giao diện
-			
-		}
+		add_Alphabet_into_Arr();
+		addKeyIntoArr2d(this.key);
+		this.key = key.toUpperCase();
+		this.plainText = plainText.toUpperCase();
+		this.plainText = chuanHoaPlainText(this.plainText); // Để xét duyệt I và J
 		
 	}
 	
 	
 	public void setKey(String key) {
 		this.key = key.toUpperCase();
+		addKeyIntoArr2d(this.key);
 	}
 	public String getKey() {
 		return this.key;
@@ -43,27 +39,14 @@ public class PlayFair {
 	
 	public void setPlainText(String plainText) {
 		this.plainText = plainText.toUpperCase();
-		chuanHoaPlainText();
+		this.plainText = chuanHoaPlainText(this.plainText);
 	}
 	public String getPlainText() {
 		return this.plainText;
 	}
 	
 	
-	// Hàm boolean kiểm tra chuỗi có số hoặc các kí tự khác
-	// Có kí tự đặc biệt hoặc số => true
-	// Chuỗi chữ thông thường => false
-	public boolean checkString(String s) {
-		//boolean check = false;
-		
-		for (int i = 0; i < s.length(); i++) {
-			if (!(s.charAt(i) >= 'a' && s.charAt(i) <= 'z') || s.charAt(i) == ' ') {
-				return true;
-			}
-		}
-		return false;
-	}
-	
+	// Truyền 26 chữ cái vào mảng để dễ dàng so với key
 	private void add_Alphabet_into_Arr() {
 		alphabetArr = new char[26];
 		
@@ -73,11 +56,9 @@ public class PlayFair {
 	}
 	
 	
+	// Kiểm tra các kí tự lặp đi lặp lại
 	private boolean kiemTraLap(char[] arr, char x, int n) {
-		
-//		if (x == ' ') {
-//			return false;
-//		}
+
 		for (int i = 0; i < n; i++) {
 			if (arr[i] == x) {
 				return false;
@@ -85,6 +66,9 @@ public class PlayFair {
 		}
 		return true;
 	}
+	// Có 2 nhiệm vụ
+	// 1 là làm gọn lại key, vd: ABCAA QW -> ABCQW để dễ dàng đưa vào arr2d hơn
+	// 2 là để xử lí I và J
 	private String chuanHoaKey(String temp) {
 		
 		String answer = "";
@@ -93,6 +77,7 @@ public class PlayFair {
 		int indexArr = 0;
 		boolean checkIJ = false;
 		
+		// Chỉ xét trường hợp có I hoặc J hoặc cả 2 trong key gốc
 		for (int i = 0; i < n; i++) {
 			char c = temp.charAt(i);
 
@@ -113,14 +98,21 @@ public class PlayFair {
 			}
 		}
 		
+		if (checkIJ == false) { // Nếu key gốc ko có I và J
+			alphabetArr['J' - 65] = '0';
+		}
+		
 		return answer;
 	}
 
 	
-	private int[] spacePositionSave;
-	private void chuanHoaPlainText() {
+	private int[] spacePositionSave; // Lưu khoảng cách space giữa các từ
+	
+	// Biến đổi I và J tùy vào cái nào đến trước và đồng thời lưu các khoảng cách space
+	// VD: IJ JI AEW -> IIIIAEW
+	private String chuanHoaPlainText(String plaintext) { 
 		String rT = "";
-		String temp = this.plainText;
+		String temp = plaintext;
 		int[] save = new int[temp.length()];
 		int index = 0;
 		
@@ -160,10 +152,11 @@ public class PlayFair {
 			spacePositionSave[i] = save[i]; 
 		}
 		
-		this.plainText = rT;
+		return rT;
 	}
 	
-	public void addKey_into_Arr2d(String key) {
+	// Cho key vào arr2d
+	private void addKeyIntoArr2d(String key) {
 		int indexKey = 0;
 		int indexAlphabet = 0;
 		
@@ -193,25 +186,36 @@ public class PlayFair {
 						
 						
 					}
-					array2d[i][j] = alphabetArr[indexAlphabet-1]; 
+					array2d[i][j] = alphabetArr[indexAlphabet-1]; // Trừ 1 là do I và J là 1
 				}
 			}
 		}
 		
 	}
 	
-	
-	public void xuat2d() {
+	public String xuatArr() {
+		String str = "";
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
-				System.out.print(array2d[i][j] + " ");
+				str += array2d[i][j];
 			}
-			System.out.println();
 		}
+		return str;
 	}
 
-//	private char[] maHoaString = new char[plainText.length() * 2];
-//	private int indexMaHoa = 0;
+	
+	private int[] findPosition(char c) {// Tìm vị trí kí tự c trong arr2d và trả về vị trí theo tọa độ x,y
+	    // Tìm vị trí của ký tự trong array2d
+	    for (int i = 0; i < 5; i++) {
+	        for (int j = 0; j < 5; j++) {
+	            if (array2d[i][j] == c) {
+	                return new int[] { i, j };
+	            }
+	        }
+	    }
+	    return null; // Trường hợp không tìm thấy
+	}
+	
 	private char[] maHoa() {
 		int index = 0;
 		int indexMaHoa = 0;
@@ -224,20 +228,21 @@ public class PlayFair {
 			a = plainText.charAt(index);
 			
 			if (n == 1) {
-				b = 'X';
+				b = kiTuThayThe;
+				index++;
 			}
 			else if (index + 1 < n) {
 				b = plainText.charAt(++index);
 				
 				if (a == b) {
-					b = 'X';
+					b = kiTuThayThe;
 				}
 				else {
 					index++;
 				}
 			}
 			else {
-				b = 'X';
+				b = kiTuThayThe;
 				index++;
 			}
 			
@@ -266,33 +271,64 @@ public class PlayFair {
 		return maHoaString;
 	}
 
-	private int[] findPosition(char c) {
-	    // Tìm vị trí của ký tự trong array2d
-	    for (int i = 0; i < 5; i++) {
-	        for (int j = 0; j < 5; j++) {
-	            if (array2d[i][j] == c) {
-	                return new int[] { i, j };
+
+	private char[] giaiMa() {
+	    int index = 0;
+	    int indexGiaMa = 0;
+	    char a, b;
+	    int n = plainText.length();
+	    char[] giaMaString = new char[plainText.length() * 2]; // Chỉ cần một mảng có chiều dài là plainText.length()
+
+	    while (index < n) {
+	        a = plainText.charAt(index);
+
+	        if (n == 1) {
+	            b = kiTuThayThe; // Khi chỉ còn một ký tự, thay thế bằng ký tự thay thế.
+	            index++;
+	        } else if (index + 1 < n) {
+	            b = plainText.charAt(++index);
+
+	            if (a == b) {
+	                b = kiTuThayThe; // Nếu hai ký tự giống nhau, thay thế một ký tự.
+	            } else {
+	                index++; // Cập nhật chỉ số nếu đã có cặp hợp lệ.
 	            }
+	        } else {
+	            b = kiTuThayThe; // Khi chỉ còn một ký tự cuối cùng, thay thế nó.
+	            index++;
+	        }
+
+	        int[] posA = findPosition(a);
+	        int[] posB = findPosition(b);
+
+	        if (posA[0] == posB[0]) {
+	            // Cùng hàng, giải mã di chuyển sang trái.
+	            giaMaString[indexGiaMa++] = array2d[posA[0]][(posA[1] + 4) % 5];
+	            giaMaString[indexGiaMa++] = array2d[posB[0]][(posB[1] + 4) % 5];
+	        } else if (posA[1] == posB[1]) {
+	            // Cùng cột, giải mã di chuyển lên trên.
+	            giaMaString[indexGiaMa++] = array2d[(posA[0] + 4) % 5][posA[1]];
+	            giaMaString[indexGiaMa++] = array2d[(posB[0] + 4) % 5][posB[1]];
+	        } else {
+	            // Bình thường (khác hàng, khác cột), thay đổi theo chiều đối xứng.
+	            giaMaString[indexGiaMa++] = array2d[posA[0]][posB[1]];
+	            giaMaString[indexGiaMa++] = array2d[posB[0]][posA[1]];
+	        }
+
+	        if (index >= n) {
+	            break;
 	        }
 	    }
-	    return null; // Trường hợp không tìm thấy
+	    return giaMaString;
 	}
 
-	private boolean checkSavePosition(int[] arrSave,int index) {
-		
-		for (int i = 0; i < arrSave.length; i++) {
-			if (arrSave[i] == index) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
+
+
+
+
 	
 	public String batDauMaHoa() {
 		String cipherText = "";
-		addKey_into_Arr2d(this.key);
-		xuat2d();
 		char[] maHoaString = new char[plainText.length() * 2];
 		maHoaString = maHoa();
 		
@@ -302,5 +338,20 @@ public class PlayFair {
 		}
 		
 		return cipherText;
+	}
+	
+	
+	public String batDauGiaiMa() {
+		String plaintext = "";
+		char[] giaiMaString = new char[plainText.length() * 2];
+		giaiMaString = giaiMa();
+
+		
+		for (int i = 0; i < plainText.length() * 2; i++) {
+			
+			plaintext += giaiMaString[i];
+		}
+		
+		return plaintext;
 	}
 }

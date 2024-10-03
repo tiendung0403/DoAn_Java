@@ -6,7 +6,7 @@ public class Main {
 		
        doanlaptrinhmahoa a = new doanlaptrinhmahoa();
        a.start();
-        
+
         
     }
 }
