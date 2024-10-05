@@ -15,10 +15,6 @@ public class Caesar {
         if (k>=0 && k<=25) {
             this.key = k;
         }
-        else {
-            //hiển thị lỗi, ném ngoaij lệ
-            throw new IllegalArgumentException("Khóa không hợp lệ");       
-         }
     }
     public int getKey(){
         return this.key;

@@ -42,12 +42,26 @@ public class caesarScreen extends subScreen {
                  để kiểm tra xem Key có phải là number không 
                  nếu thành công thì tiến hành gán kết quả mã hóa vào biến c 
                  và hiển thị vào Ô cipertext*/
-                    Integer.parseInt(keyE.getText());                
+                    Integer.parseInt(keyE.getText());
+                    ///
+                    /// thực hiện ép kiểu int cho key và kiểm tra key có thỏa điều 
+                    //kiện không nếu thỏa thì thực hiện còn không thì làm mới ô key và hiện thông báo
+
+                    int n = Integer.parseInt(keyE.getText());
+                    if(n>= 0 && n<=25){                
                     String c = a.encrypt(plaintext.getText(),Integer.parseInt(keyE.getText()));
                     cipherText.setText(c);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n nhập key từ 0 -> 25");
+                        keyE.setText(null);
+                    }
+
                 }catch (NumberFormatException ex ) {
                  // hiển thị thông báo khi lỗi khi không ép kiểu thanhf công "key không phải dạnh number" 
                     JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng number");
+                    keyE.setText(null);
+
                 }
             }
         });
@@ -62,12 +76,23 @@ public class caesarScreen extends subScreen {
                để kiểm tra xem Key có phải là number không 
                nếu thành công thì tiến hành gán kết quả mã hóa vào biến p 
                và hiển thị vào Ô cipertext*/
-                    Integer.parseInt(keyD.getText());                
+                    Integer.parseInt(keyD.getText());
+                    int n = Integer.parseInt(keyE.getText());
+                    ///
+                    /// thực hiện ép kiểu int cho key và kiểm tra key có thỏa điều 
+                    //kiện không nếu thỏa thì thực hiện còn không thì làm mới ô key và hiện thông báo
+                    if(n>= 0 && n<=25){                
                     String p = a.decrypt(cipherText.getText(),Integer.parseInt(keyD.getText()));
                     plaintext.setText(p);
+                    }else {
+                        JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n nhập key từ 0 -> 25");
+                        keyE.setText(null);
+                    }
                 }catch (NumberFormatException ex ) {
                // hiển thị thông báo khi lỗi khi không ép kiểu thanh công "key không phải dạnh number" 
                     JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng number");
+                    keyE.setText(null);
+
                 }
             }
         });
