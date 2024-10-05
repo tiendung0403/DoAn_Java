@@ -1,5 +1,4 @@
 import giaoDien.*;
-import Script.PlayFair;
 
 public class Main {
 	public static void main(String[] args) {
@@ -7,7 +6,6 @@ public class Main {
        doanlaptrinhmahoa a = new doanlaptrinhmahoa();
        a.start();
 
-        
     }
 }
 
