@@ -1,10 +1,9 @@
 package Script;
 
-import java.util.Arrays;
-
 public class PlayFair {
 	private String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	private char[] alphabetArr;
+	//private char[] alphabetArr = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	private char[] alphabetArr = new char[26];
 	private char[][] array2d = new char[5][5];
 	
 	
@@ -19,12 +18,11 @@ public class PlayFair {
 	}
 	
 	public PlayFair(String key, String plainText) {
-		add_Alphabet_into_Arr();
-		addKeyIntoArr2d(this.key);
 		this.key = key.toUpperCase();
 		this.plainText = plainText.toUpperCase();
 		this.plainText = chuanHoaPlainText(this.plainText); // Để xét duyệt I và J
-		
+		add_Alphabet_into_Arr();
+		addKeyIntoArr2d(key);
 	}
 	
 	
@@ -169,11 +167,8 @@ public class PlayFair {
 				if (indexKey < tempKey.length()) {
 					
 					char temp = tempKey.charAt(indexKey++); 
-					
-					alphabetArr[temp - 65] = '0';
-					
 					array2d[i][j] = temp;
-					
+					alphabetArr[temp - 65] = '0';
 				}
 				// Nhập những chữ cái còn lại mà key không có
 				else {
@@ -183,8 +178,6 @@ public class PlayFair {
 						if (alphabetArr[indexAlphabet++] != '0') {
 							break;
 						}
-						
-						
 					}
 					array2d[i][j] = alphabetArr[indexAlphabet-1]; // Trừ 1 là do I và J là 1
 				}
