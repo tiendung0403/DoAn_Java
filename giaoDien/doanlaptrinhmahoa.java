@@ -89,9 +89,16 @@ public class doanlaptrinhmahoa {
             }
         });
 
-    //tạo nút mới tên bảng chữ đơn
+    //tạo nút mới tên bảng dịch chuyển dòng
         JButton chuyendichdongButton = new JButton("Chuyển dịch dòng");
-
+        chuyendichdongButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				changeScreen("ChuyenDichDongScreen", "Chuyển dịch dòng", false, "");
+				
+			}
+		});
         
         
     //tạo nút mới tên bảng chữ đơn
@@ -146,23 +153,32 @@ public class doanlaptrinhmahoa {
     }
     
     
+ // màn hình và chức năng của Bảng playfair
+    public JPanel chuyenDichDongScr(){
+        JPanel CDD = new ChuyenDichDongScreen(this).Screen();
+        return CDD;
+    }
+    
+    
     public void start() {
     	cardLayout = new CardLayout();
         panelContainer = new JPanel(cardLayout);
     
         // Tạo các màn hình 
-        JPanel mainScreen = mainScreen();
-        JPanel caesarScreen = caesar();
-        JPanel bangChuDonScreen = bangChuDonScr();
-        JPanel vegenereScreen = vegenereScr();
-        JPanel playfairScreen = playfairScr();
+        JPanel mainScreenJPanel = mainScreen();
+        JPanel caesarScreenJPanel = caesar();
+        JPanel bangChuDonScreenJPanel = bangChuDonScr();
+        JPanel vegenereScreenJPanel = vegenereScr();
+        JPanel playfairScreenJPanel = playfairScr();
+        JPanel chuyenDichDongScreenJPanel = chuyenDichDongScr();
     
         // Thêm các màn hình vào CardLayout
-        panelContainer.add(mainScreen, "MainScreen");
-        panelContainer.add(caesarScreen, "CaesarScreen");
-        panelContainer.add(bangChuDonScreen,"BangchudonScreen");
-        panelContainer.add(vegenereScreen,"VegenereScreen");
-        panelContainer.add(playfairScreen,"PlayfairScreen");
+        panelContainer.add(mainScreenJPanel, "MainScreen");
+        panelContainer.add(caesarScreenJPanel, "CaesarScreen");
+        panelContainer.add(bangChuDonScreenJPanel,"BangchudonScreen");
+        panelContainer.add(vegenereScreenJPanel,"VegenereScreen");
+        panelContainer.add(playfairScreenJPanel,"PlayfairScreen");
+        panelContainer.add(chuyenDichDongScreenJPanel, "ChuyenDichDongScreen");
         
         // Thiết lập màn hình chính hiển thị đầu tiên
         cardLayout.show(panelContainer, "MainScreen");
