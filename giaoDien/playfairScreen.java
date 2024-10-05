@@ -135,11 +135,11 @@ public class playfairScreen extends subScreen {
 	
 
 	
-	private String removeInvisibleChars(String input) {
+	public String removeInvisibleChars(String input) {
         return input.replaceAll("[\\p{C}]+", ""); // Loại bỏ các kí tự không thể nhìn thấy được
     }
 	
-	private boolean showErrorWhenInputWrong(String str, String name) {
+	public boolean showErrorWhenInputWrong(String str, String name) {
 		boolean check = true;
 		if (str.trim().isEmpty()) {
     		JOptionPane.showMessageDialog(frame, "Bạn chưa nhập gì ở " + name);
