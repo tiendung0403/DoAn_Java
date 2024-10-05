@@ -12,9 +12,7 @@ public class Caesar {
     }
 
     public void setKey(int k){
-        if (k>=0 && k<=25) {
             this.key = k;
-        }
     }
     public int getKey(){
         return this.key;
