@@ -12,13 +12,7 @@ public class Caesar {
     }
 
     public void setKey(int k){
-        if (k>=0 && k<=25) {
             this.key = k;
-        }
-        else {
-            //hiển thị lỗi, ném ngoaij lệ
-            throw new IllegalArgumentException("Khóa không hợp lệ");       
-         }
     }
     public int getKey(){
         return this.key;
@@ -43,7 +37,9 @@ public class Caesar {
         for (char c: plaintext.toCharArray()) {
             if (Character.isLetter(c)) {             
                 char n = (c >= 'A' && c <= 'Z') ? 'A' : 'a';
-                ciphertext += (char) ((c - n + key) % 26 + n);
+                // nếu biến n nằm trong khoảng của chữ in thì chả về biến n chũ in
+                // còn ko đúng thì chả về chữ thường
+                ciphertext += (char) ((c - n + key) % 26 + n);// thực hiện phép chia lấy dư 
             }
             else ciphertext += c;
         }
@@ -52,7 +48,8 @@ public class Caesar {
     }
     //giải mã 
     public String decrypt (String ciphertext,int key){
-        
+        //tận dụng lại hàm mã hóa truyền vào hàm mã hóa với số key còn lại, 
+        //khi đó hàm mã hóa sẽ mã hóa tiếp và quay lại kí tự ban đầu theo chiều kim đồng hồ
         return encrypt (ciphertext, 26 - key);
     }
 }
