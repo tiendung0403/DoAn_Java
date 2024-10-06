@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -15,6 +17,8 @@ import javax.swing.text.PlainDocument;
 
 public class subScreen {
 	
+	// Do các thành phần này là chủ yếu có ở các lớp con nên sẽ tạo ở đây
+	// Tạo các thành phần trước ở lớp cha, set tọa độ thì ở lớp con
 	protected JLabel plaintextJLabel;
     protected JLabel ciphertextJLabel;
 	protected JTextArea plaintext;
@@ -28,7 +32,8 @@ public class subScreen {
     protected JTextField keyD;
     
 	
-	
+	private JFrame frame;
+    
 	private doanlaptrinhmahoa mainClass;
 
     // Constructor nhận tham chiếu của lớp chính
@@ -40,7 +45,7 @@ public class subScreen {
 	protected JPanel Screen() {
 		JPanel newPanel = new JPanel(null);
 		
-		//khởi tạo các thành phần
+		// Khởi tạo các thành phần
 		plaintextJLabel = new JLabel("Plaintext");
         ciphertextJLabel = new JLabel("Ciphertext");
         plaintext = new JTextArea();
@@ -54,8 +59,8 @@ public class subScreen {
         keyD = new JTextField();
         
         
-        
-      //Không giới hạn số lượng kí tự khi nhập vào textArea
+        // Plaintext và Ciphertext sẽ luôn có mặt nên set tọa độ và kích thước ở đây
+        //Không giới hạn số lượng kí tự khi nhập vào textArea
         cipherText.setDocument(new PlainDocument()); 
         plaintext.setLineWrap(true); // Cho phép tự động xuống hàng
         plaintext.setWrapStyleWord(true); // Tự động xuống từ hoàn chỉnh, không cắt từ
@@ -69,7 +74,7 @@ public class subScreen {
         
         
         
-     // set tọa độ plaintext và ciphertext
+        // set tọa độ plaintext và ciphertext
         plaintextJLabel.setBounds(10, 22, 100, 20);
 	    ciphertextJLabel.setBounds(10, 182, 100, 20);
 	    plainScrollPane.setBounds(10, 40, 400, 100);
@@ -107,5 +112,23 @@ public class subScreen {
         return newPanel;
 	}
 	
+	protected String removeInvisibleChars(String input) {
+        return input.replaceAll("[\\p{C}]+", ""); // Loại bỏ các kí tự không thể nhìn thấy được
+    }
 	
+	// Kiểm tra lỗi ở các thành phần giao diện, ở Key, Plaintext, Ciphertext
+	protected boolean showErrorWhenInputWrong(String str, String name) {
+		boolean check = true;
+		if (str.trim().isEmpty()) {
+    		JOptionPane.showMessageDialog(frame, "Bạn chưa nhập gì ở " + name);
+    		check = false;
+    	}
+    	else if (str.matches(".*[^a-zA-Z ]+.*")) {
+			JOptionPane.showMessageDialog(frame, "Không được nhập số hoặc kí tự đặc biệt ở " + name);
+			check = false;
+		}
+		
+		
+		return check;
+	}
 }
