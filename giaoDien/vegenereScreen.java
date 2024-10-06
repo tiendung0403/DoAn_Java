@@ -32,6 +32,7 @@ public class vegenereScreen extends subScreen {
 		keyNew.setBounds(590,45,180,30);
 		JLabel keygeneration = new JLabel("Key generation");
 		keygeneration.setBounds(490,45,90,30);
+		keyNew.setEditable(false);
 		
 		Panel.add(keyNew);
 		Panel.add(keygeneration);
@@ -43,18 +44,25 @@ public class vegenereScreen extends subScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
 			    Vegenere a = new Vegenere();
-			    try {/*thực hiện ép kiểu sstring sang int nếu thành công
-				tứ key không phải dạng chuỗi, thực hiện hiển thị thông báo loi*/
-				    Integer.parseInt(keyE.getText());                    
-				    JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng String vd: \"nhaplaidi\"");
-			
-			    } catch (NumberFormatException ex ) {
-			//nếu key dạng chuỗi thì thực hiện câu lệnh
-				    String C = a.encrypt(plaintext.getText(),keyE.getText());
-				    cipherText.setText(C);
-					keyNew.setText(a.newKey(plaintext.getText(),keyE.getText()));
-			    }
-            }
+				try {/* 
+					//thực hiện ép kiểu từ chuỗi string của Key sang kiểu int
+					để kiểm tra xem Key có phải là number không 
+					nếu thành công thì hiển thị lỗi và bắt người dùng nhập lại*/					   
+					Integer.parseInt(keyE.getText());
+   					JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng chuỗi");
+					keyE.setText(null);
+
+				}catch (NumberFormatException ex ) {
+					   ///
+					playfairScreen x = new playfairScreen(null);
+					String strKeyTextField = x.removeInvisibleChars(keyE.getText());
+				
+				    if (x.showErrorWhenInputWrong(strKeyTextField, "Key")) {
+						    cipherText.setText(a.encrypt(plaintext.getText(),strKeyTextField));
+							keyNew.setText(a.newKey(plaintext.getText(),strKeyTextField));
+					    }
+				    }
+		        }
         });
 	    
 	    
@@ -63,20 +71,26 @@ public class vegenereScreen extends subScreen {
         @Override
         public void actionPerformed(ActionEvent e) {
 			Vegenere a = new Vegenere();
-			try {
-			//Kiểm tra nếu key được nhập là một số nguyên
-			    Integer.parseInt(keyD.getText());
-				JOptionPane.showMessageDialog(frame, "Nhập sai Key! Vui lòng nhập key dạng chuỗi kí tự.");
-			//hiển thị thông báo Key không đúng
-			} catch (NumberFormatException ex) {
-			//Khi key không phải là số thực hiện giải mã
-				String p = a.decrypt(cipherText.getText(), keyD.getText());
-				plaintext.setText(p); // xóa kết quả cũ và Đưa kết quả mới giải mã vào ô plaintext
-				keyNew.setText(a.newKey(cipherText.getText(),keyD.getText()));
+			try {/* 
+				//thực hiện ép kiểu từ chuỗi string của Key sang kiểu int
+				để kiểm tra xem Key có phải là number không 
+				nếu thành công thì hiển thị lỗi và bắt người dùng nhập lại*/					   
+				Integer.parseInt(keyD.getText());
+				JOptionPane.showMessageDialog(frame, "Nhập sai Key!\n Lưu ý nhập key dạng chuỗi");
+				keyD.setText(null);
 
+			}catch (NumberFormatException ex ) {
+				   ///
+				playfairScreen x = new playfairScreen(null);
+				String strKeyTextField = x.removeInvisibleChars(keyD.getText());
+			
+				if (x.showErrorWhenInputWrong(strKeyTextField, "Key")) {
+						plaintext.setText(a.decrypt(cipherText.getText(),strKeyTextField));
+						keyNew.setText(a.newKey(cipherText.getText(),strKeyTextField));
+					}
+				}
 			}
-        }
-    });
+});
     
 	    return Panel;
 	}
