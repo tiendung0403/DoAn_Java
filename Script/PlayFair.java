@@ -158,7 +158,7 @@ public class PlayFair {
 		int indexKey = 0;
 		int indexAlphabet = 0;
 		
-		String tempKey = chuanHoaKey(key); // Chuẩn hóa key trc khi cho vào mảng 2d
+		String tempKey = chuanHoaKey(key).toUpperCase(); // Chuẩn hóa key trc khi cho vào mảng 2d
 		
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
