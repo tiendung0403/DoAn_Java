@@ -5,18 +5,20 @@ public class ChuyenDichDong {
 	private String key = "";
 	private String plaintext = "";
 	
+	// Tạo biến hàng và cột để lưu giá trị và tạo mảng, duyệt mảng cho dễ dàng
 	private int collum;
 	private int row;
 	
+	// Tạo mảng chứa khi đổ plaintext vào
 	private char[][] arr2dDecrypt;
 	private char[][] arr2dEncrypt;
 	
-	
+	// Tạo 2 mảng int để lưu các thứ tự 
 	private int[] sttEncrypt;
 	private int[] sttDecrypt;
 	
 	
-	private char kiTuThayThe = 'X';
+	private char kiTuThayThe = 'Z';
 	
 	public ChuyenDichDong() {
 		
@@ -26,7 +28,7 @@ public class ChuyenDichDong {
 		this.plaintext = chuanHoaChuoi(plaintext.toUpperCase());
 	}
 	
-	public void setKey(String key) {
+	public void setKey(String key) { 
 		this.key = chuanHoaChuoi(key.toUpperCase());
 	}
 	public String getKey() {
@@ -65,16 +67,18 @@ public class ChuyenDichDong {
 		
 	}
 	
+	// Biến chuỗi key thành các con số và lưu vào mảng
 	private int[] charArrToCharInt(String str) {
 		int n = str.length();
 		int[] arrInt = new int[n];
 		
 		for (int i = 0; i < n; i++) {
-			arrInt[i] =  ((int)str.charAt(i) - 65);
+			arrInt[i] =  ((int)str.charAt(i) - 65); // Lưu số nhỏ hơn, thay vì A (65) thì thành A (0)
 		}
 		
 		return arrInt;
 	}
+	// Sau khi biến chuỗi key thành các con số thì kiếm vị trí theo thứ tự từ A -> Z và lưu vào mảng để chuẩn bị mã hóa hoặc giải mã
 	private int[] laystt() {
 		int n = this.key.length();
 		int indexsttEncrypt = 0;
@@ -101,7 +105,7 @@ public class ChuyenDichDong {
 		return tempsttEncrypt;
 	}
 	
-	
+	// Đổ plaintext vào arr
 	private void addPlaintextIntoArr2dEncrypt() {
 		int indexPlaintext = 0;
 		int n = plaintext.length();
@@ -112,7 +116,7 @@ public class ChuyenDichDong {
 					arr2dEncrypt[i][j] = this.plaintext.charAt(indexPlaintext++);
 				}
 				else {
-					arr2dEncrypt[i][j] = kiTuThayThe; 
+					arr2dEncrypt[i][j] = kiTuThayThe; // Các ô còn trống sẽ đổ vào kí tự thay thế
 				}
 			}
 		}
@@ -122,7 +126,7 @@ public class ChuyenDichDong {
 		sttEncrypt = laystt();
 		String maHoaString = "";
 		for (int i = 0; i < collum; i++) {
-			int pos = sttEncrypt[i];
+			int pos = sttEncrypt[i]; // pos sẽ lấy số thứ tự và bắt đầu mã hóa
 			for (int j = 0; j < row; j++) {
 				maHoaString += arr2dEncrypt[j][pos];
 			}
@@ -130,7 +134,7 @@ public class ChuyenDichDong {
 		}
 		return maHoaString;
 	}
-	
+	// đổ ciphertext vào mảng theo thứ tự của key
 	private void addPlaintextIntoArr2dDecrypt() {
 		String ciphertext = plaintext;
 		int indexCiphertext = 0;
@@ -143,7 +147,7 @@ public class ChuyenDichDong {
 					arr2dDecrypt[j][pos] = ciphertext.charAt(indexCiphertext++);
 				}
 				else {
-					arr2dDecrypt[j][pos] = kiTuThayThe;
+					arr2dDecrypt[j][pos] = kiTuThayThe; // các ô còn trống sẽ đc cho vào bằng các kituthaythe
 				}
 			}
 		}
@@ -161,6 +165,7 @@ public class ChuyenDichDong {
 		return temp;
 	}
 	
+	// 1 hàm thêm để xem mảng ra sao
 	public void xuatArr() {
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < collum; j++) {
@@ -171,15 +176,15 @@ public class ChuyenDichDong {
 	}
 	
 	public String batDauMaHoa() {
-		arr2dEncrypt = createArr2d();
-		addPlaintextIntoArr2dEncrypt();
-		return maHoa();
+		arr2dEncrypt = createArr2d(); // Tạo mảng 2d
+		addPlaintextIntoArr2dEncrypt(); // Đổ plaintext vào mảng mã hóa
+		return maHoa(); // Mã hóa
 	}
 	
 	public String batDauGiaiMa() {
-		arr2dDecrypt = createArr2d();
-		addPlaintextIntoArr2dDecrypt();
-		return giaiMa();
+		arr2dDecrypt = createArr2d(); // Tạo mảng 2d
+		addPlaintextIntoArr2dDecrypt(); // Đổ plaintext vào mảng giải mã
+		return giaiMa(); // Giải mã
 	}
 	
 	

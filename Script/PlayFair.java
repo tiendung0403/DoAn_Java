@@ -18,11 +18,11 @@ public class PlayFair {
 	}
 	
 	public PlayFair(String key, String plainText) {
-		this.key = key.toUpperCase();
-		this.plainText = plainText.toUpperCase();
+		this.key = key.toUpperCase(); // Cho key lên chữ hoa
+		this.plainText = plainText.toUpperCase(); // Cho plaintext lên chữ hoa
 		this.plainText = chuanHoaPlainText(this.plainText); // Để xét duyệt I và J
-		add_Alphabet_into_Arr();
-		addKeyIntoArr2d(key);
+		add_Alphabet_into_Arr(); // Cho bảng chữ alphabet vào mảng
+		addKeyIntoArr2d(key); // nếu có key thì cho key vào mảng 2d
 	}
 	
 	
@@ -79,7 +79,7 @@ public class PlayFair {
 		for (int i = 0; i < n; i++) {
 			char c = temp.charAt(i);
 
-			if (c != ' ') {
+			if (c != ' ') { // Bỏ khoảng cách
 				if (kiemTraLap(tempArr, c, i)) {
 					if ((c == 'I' || c == 'J') && checkIJ) {
 						continue;
@@ -88,7 +88,7 @@ public class PlayFair {
 					answer += tempArr[indexArr++];
 				}
 				
-				if (c == 'I' || c == 'J') {
+				if (c == 'I' || c == 'J') { // Nếu I hoặc J xuất hiện lần đầu trong mảng thì cả 2 sẽ bị vô hiệu hóa trong mảng alphabet vì key chỉ cần 1
 					checkIJ = true;
 					alphabetArr['I' - 65] = '0';
 					alphabetArr['J' - 65] = '0';
@@ -96,8 +96,8 @@ public class PlayFair {
 			}
 		}
 		
-		if (checkIJ == false) { // Nếu key gốc ko có I và J
-			alphabetArr['J' - 65] = '0';
+		if (checkIJ == false) { // Nếu key gốc ko có I và J 
+			alphabetArr['J' - 65] = '0'; // thì sẽ lấy I và bỏ J
 		}
 		
 		return answer;
@@ -158,7 +158,7 @@ public class PlayFair {
 		int indexKey = 0;
 		int indexAlphabet = 0;
 		
-		String tempKey = chuanHoaKey(key).toUpperCase();
+		String tempKey = chuanHoaKey(key); // Chuẩn hóa key trc khi cho vào mảng 2d
 		
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 5; j++) {
@@ -179,13 +179,13 @@ public class PlayFair {
 							break;
 						}
 					}
-					array2d[i][j] = alphabetArr[indexAlphabet-1]; // Trừ 1 là do I và J là 1
+					array2d[i][j] = alphabetArr[indexAlphabet-1]; // Trừ 1 do I và J là 1
 				}
 			}
 		}
 		
 	}
-	
+	// hàm thêm kiểm tra mảng
 	public String xuatArr() {
 		String str = "";
 		for (int i = 0; i < 5; i++) {
@@ -220,6 +220,7 @@ public class PlayFair {
 			
 			a = plainText.charAt(index);
 			
+			// Nếu chỉ có 1 kí tự thì sẽ add thêm kí tự thay thế để mã hóa
 			if (n == 1) {
 				b = kiTuThayThe;
 				index++;
@@ -227,7 +228,7 @@ public class PlayFair {
 			else if (index + 1 < n) {
 				b = plainText.charAt(++index);
 				
-				if (a == b) {
+				if (a == b) { // Nếu 2 chữ kề nhau trùng thì thêm 1 kí tự thay thế để mã hóa, VD: AA -> AZAZ
 					b = kiTuThayThe;
 				}
 				else {
@@ -239,16 +240,17 @@ public class PlayFair {
 				index++;
 			}
 			
+			// Tìm vị trí
 			int[] posA = findPosition(a);
 	        int[] posB = findPosition(b);
 				
 			if (posA[0] == posB[0]) {
-				// Cùng hàng
+				// Cùng hàng, di chuyển sang phải
 				maHoaString[indexMaHoa++] = array2d[posA[0]][(posA[1] + 1) % 5];
 				maHoaString[indexMaHoa++] = array2d[posB[0]][(posB[1] + 1) % 5];
 			}
 			else if (posA[1] == posB[1]) {
-				// Cùng cột
+				// Cùng cột, di chuyển xuống
 				maHoaString[indexMaHoa++] = array2d[(posA[0] + 1) % 5][posA[1]];
 				maHoaString[indexMaHoa++] = array2d[(posB[0] + 1) % 5][posB[1]];
 			}
@@ -270,7 +272,7 @@ public class PlayFair {
 	    int indexGiaMa = 0;
 	    char a, b;
 	    int n = plainText.length();
-	    char[] giaMaString = new char[plainText.length() * 2]; // Chỉ cần một mảng có chiều dài là plainText.length()
+	    char[] giaMaString = new char[plainText.length() * 2];
 
 	    while (index < n) {
 	        a = plainText.charAt(index);
@@ -282,9 +284,9 @@ public class PlayFair {
 	            b = plainText.charAt(++index);
 
 	            if (a == b) {
-	                b = kiTuThayThe; // Nếu hai ký tự giống nhau, thay thế một ký tự.
+	                b = kiTuThayThe; // Nếu hai ký tự giống nhau, thêm kí tự thay thế vào giữa, VD: AA -> AZAZ
 	            } else {
-	                index++; // Cập nhật chỉ số nếu đã có cặp hợp lệ.
+	                index++; // index + 1 vì cả 2 kí tự khác nhau, ko cần thêm kí tự đặc biệt
 	            }
 	        } else {
 	            b = kiTuThayThe; // Khi chỉ còn một ký tự cuối cùng, thay thế nó.
