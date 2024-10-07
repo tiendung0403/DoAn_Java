@@ -6,13 +6,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Script.ChuyenDichDong;
 
 public class ChuyenDichDongScreen extends subScreen {
 
-	
+	private JFrame frame = new JFrame();
 	public ChuyenDichDongScreen(doanlaptrinhmahoa mainClass) {
 		super(mainClass);
 	}
@@ -91,5 +93,19 @@ public class ChuyenDichDongScreen extends subScreen {
         
 		return Panel;
 	}
-	
+	@Override
+	protected boolean showErrorWhenInputWrong(String str, String name) {
+		boolean check = true;
+		if (str.trim().isEmpty()) {
+    		JOptionPane.showMessageDialog(frame, "Bạn chưa nhập gì ở " + name);
+    		check = false;
+    	}
+    	else if (str.matches(".*[^a-zA-Z0-9 ]+.*")) {
+			JOptionPane.showMessageDialog(frame, "Không được nhập số hoặc kí tự đặc biệt ở " + name);
+			check = false;
+		}
+		
+		
+		return check;
+	}
 }
