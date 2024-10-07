@@ -1,4 +1,3 @@
 @echo off
-cd Main
+cd Program
 java Main.java
-exit
