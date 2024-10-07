@@ -10,7 +10,7 @@ public class PlayFair {
 	private String key = "";
 	private String plainText = "";
 	
-	private char kiTuThayThe = 'X';
+	private char kiTuThayThe = 'Z';
 	
 	
 	public PlayFair() {
